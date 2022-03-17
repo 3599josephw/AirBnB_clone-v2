@@ -65,3 +65,6 @@ class FileStorage:
         tmp = str(obj.__class__.__name__) + '.' + str(obj.id)
         del objs[tmp]
         self.save()
+
+    def close(self):
+        FileStorage.reload()

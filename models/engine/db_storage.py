@@ -17,14 +17,7 @@ from sqlalchemy import create_engine
 from sqlalchemy.orm import scoped_session
 from os import getenv
 
-class_dict = {
-    "Amenity": Amenity,
-    "City": City,
-    "Place": Place,
-    "State": State,
-    "User": User,
-    "Review": Review
-}
+our_insts = (City, State, User, Place, Amenity, Review)
 
 
 class DBStorage():
@@ -54,15 +47,16 @@ class DBStorage():
             Base.metadata.drop_all(self.__engine)
 
     def all(self, cls=None):
-        """Retrieves all objects requested"""
+        """Retrieves all objects requested V2"""
         all_dict = {}
-        for exmpl in class_dict:
-            if cls is None or cls == exmpl:
-                our_objs = self.__session.query(class_dict[exmpl]).all()
-                for obj in our_objs:
-                    key = obj.__class__.__name__ + "." + obj.id
-                    all_dict[key] = obj
-        return (all_dict)
+        if cls is None:
+            for inst in our_insts:
+                for obj in self.__session.query(inst):
+                    all_dict["{}.{}".format(inst.__name__,obj.id)] = obj
+        elif cls in our_insts:
+            for obj in self.__session.query(cls):
+                all_dict["{}.{}".format(cls.__name__, obj.id)] = obj
+        return all_dict
 
     def new(self, obj):
         """adds an object"""

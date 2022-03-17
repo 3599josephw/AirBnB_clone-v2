@@ -1,13 +1,72 @@
 #!/usr/bin/python3
 """ Module for testing file storage"""
 import unittest
-from models.base_model import BaseModel
+from models.engine.file_storage import FileStorage
+from models.base_model import Base, BaseModel
+from models.user import User
+from models.city import City
+from models.state import State
+from models.amenity import Amenity
+from models.review import Review
+from models.place import Place
 from models import storage
 import os
+import json
 
 
 class test_fileStorage(unittest.TestCase):
     """ Class to test the file storage method """
+
+    @classmethod
+    def setUpClass(cls):
+        """setting up"""
+        try:
+            os.rename("file.json", "tmp")
+        except IOError:
+            pass
+        FileStorage._FileStorage__objects = {}
+        cls.storage = FileStorage()
+        cls.base = BaseModel()
+        key = "{}.{}".format(type(cls.base).__name__, cls.base.id)
+        FileStorage._FileStorage__objects[key] = cls.base
+        cls.user = User()
+        key = "{}.{}".format(type(cls.user).__name__, cls.user.id)
+        FileStorage._FileStorage__objects[key] = cls.user
+        cls.state = State()
+        key = "{}.{}".format(type(cls.state).__name__, cls.state.id)
+        FileStorage._FileStorage__objects[key] = cls.state
+        cls.place = Place()
+        key = "{}.{}".format(type(cls.place).__name__, cls.place.id)
+        FileStorage._FileStorage__objects[key] = cls.place
+        cls.city = City()
+        key = "{}.{}".format(type(cls.city).__name__, cls.city.id)
+        FileStorage._FileStorage__objects[key] = cls.city
+        cls.amenity = Amenity()
+        key = "{}.{}".format(type(cls.amenity).__name__, cls.amenity.id)
+        FileStorage._FileStorage__objects[key] = cls.amenity
+        cls.review = Review()
+        key = "{}.{}".format(type(cls.review).__name__, cls.review.id)
+        FileStorage._FileStorage__objects[key] = cls.review
+
+    @classmethod
+    def tearDownClass(cls):
+        """tearing down"""
+        try:
+            os.remove("file.json")
+        except IOError:
+            pass
+        try:
+            os.rename("tmp", "file.json")
+        except IOError:
+            pass
+        del cls.storage
+        del cls.review
+        del cls.amenity
+        del cls.base
+        del cls.user
+        del cls.city
+        del cls.place
+        del cls.state
 
     def setUp(self):
         """ Set up test environment """
@@ -21,7 +80,7 @@ class test_fileStorage(unittest.TestCase):
         """ Remove storage file at end of tests """
         try:
             os.remove('file.json')
-        except:
+        except Exception:
             pass
 
     def test_obj_list_empty(self):
@@ -31,6 +90,7 @@ class test_fileStorage(unittest.TestCase):
     def test_new(self):
         """ New object is correctly added to __objects """
         new = BaseModel()
+        new.save()
         for obj in storage.all().values():
             temp = obj
         self.assertTrue(temp is obj)
@@ -63,11 +123,11 @@ class test_fileStorage(unittest.TestCase):
     def test_reload(self):
         """ Storage file is successfully loaded to __objects """
         new = BaseModel()
-        storage.save()
+        new.save()
         storage.reload()
         for obj in storage.all().values():
             loaded = obj
-        self.assertEqual(new.to_dict()['id'], loaded.to_dict()['id'])
+        self.assertEqual(new.to_dict()['id'], obj.to_dict()['id'])
 
     def test_reload_empty(self):
         """ Load from an empty file """
@@ -97,6 +157,7 @@ class test_fileStorage(unittest.TestCase):
     def test_key_format(self):
         """ Key is properly formatted """
         new = BaseModel()
+        new.save()
         _id = new.to_dict()['id']
         for key in storage.all().keys():
             temp = key

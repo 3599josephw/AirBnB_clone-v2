@@ -1,4 +1,4 @@
-from os import stat_result
+"""Task 7 - states_list"""
 from flask import Flask
 from flask import render_template
 from models import storage
@@ -9,9 +9,11 @@ app.url_map.strict_slashes = False
 
 states = storage.all(State)
 
+
 @app.route("/states_list")
 def states_list():
     return render_template('7-states_list.html', states=states)
+
 
 @app.teardown_appcontext
 def teardown():

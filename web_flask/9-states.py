@@ -15,12 +15,14 @@ states = storage.all(State)
 @app.route("/states")
 @app.route("/states/<id>")
 def cities_list(id=None):
+    """returns html page of states or cities in a state"""
     return render_template('8-cities_by_states.html', states=states, id=id)
 
 
 @app.teardown_appcontext
 def teardown():
+    """shuts down database"""
     storage.close()
 
-if '__name__' == '__main__':
+if __name__ == '__main__':
     app.run(host="0.0.0.0")

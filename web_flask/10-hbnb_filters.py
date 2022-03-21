@@ -16,13 +16,15 @@ amenities = storage.all(Amenity)
 
 @app.route("/hbnb_filters")
 def filters():
+    """Returns html page with dropdown of states and cities"""
     return render_template('10-hbnb_filters.html', states=states,
                            amenities=amenities)
 
 
 @app.teardown_appcontext
 def teardown():
+    """shuts down database"""
     storage.close()
 
-if '__name__' == '__main__':
+if __name__ == '__main__':
     app.run(host="0.0.0.0")

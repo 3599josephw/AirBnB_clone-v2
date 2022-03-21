@@ -21,10 +21,10 @@
 					<h3>States</h3>
 					<h4>&nbsp;</h4>
 					<ul class="popover">
-						{% for state in states|dictsort %}
+						{% for state in states.values() | sort(attribute="name") %}
                             <li><B>{{ state.name }}</B></li>
                                 <ul>
-                                {% for city in states.cities|dictsort %}
+                                {% for city in state.cities | sort(attribute="name") %}
                                     <li>{{ city.name }}</li>
                                 {% endfor %}
                                 </ul>
@@ -35,7 +35,7 @@
 					<h3>Amenities</h3>
 					<h4>&nbsp;</h4>
 					<ul class="popover">
-                        {% for item in amenties|dictsort %}
+                        {% for item in amenties.values() | sort(attribute="name") %}
                             <li>{{ item.name }}</li>
                         {% endfor %}
 					</ul>

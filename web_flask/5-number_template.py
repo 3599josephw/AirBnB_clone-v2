@@ -1,3 +1,4 @@
+#!/usr/bin/python3
 """Task 5 - number_template"""
 from flask import Flask
 from flask import render_template
@@ -36,4 +37,5 @@ def number(n):
 def number_template(n):
     return render_template('5-number.html', n=n)
 
-app.run(host="0.0.0.0")
+if '__name__' == '__main__':
+    app.run(host="0.0.0.0")

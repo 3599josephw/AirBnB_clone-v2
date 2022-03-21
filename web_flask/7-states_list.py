@@ -1,3 +1,4 @@
+#!/usr/bin/python3
 """Task 7 - states_list"""
 from flask import Flask
 from flask import render_template
@@ -19,4 +20,5 @@ def states_list():
 def teardown():
     storage.close()
 
-app.run(host="0.0.0.0")
+if '__name__' == '__main__':
+    app.run(host="0.0.0.0")

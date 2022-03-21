@@ -1,3 +1,4 @@
+#!/usr/bin/python3
 """Task 4 - number_route"""
 from flask import Flask
 
@@ -30,4 +31,5 @@ def python_is_cool(text="is cool"):
 def number(n):
     return "{} is a number".format(n)
 
-app.run(host="0.0.0.0")
+if '__name__' == '__main__':
+    app.run(host="0.0.0.0")

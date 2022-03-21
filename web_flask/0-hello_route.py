@@ -1,3 +1,4 @@
+#!/usr/bin/python3
 """Task 0 - Hello Route"""
 from flask import Flask
 
@@ -9,4 +10,6 @@ app.url_map.strict_slashes = False
 def hello_hbnb():
     return "<p>Hello HBNB!</p>"
 
-app.run(host="0.0.0.0")
+
+if '__name__' == '__main__':
+    app.run(host="0.0.0.0")

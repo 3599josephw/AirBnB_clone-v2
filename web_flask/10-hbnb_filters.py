@@ -1,3 +1,4 @@
+#!/usr/bin/python3
 """Task 10 - hbnb_filters"""
 from flask import Flask
 from flask import render_template
@@ -23,4 +24,5 @@ def filters():
 def teardown():
     storage.close()
 
-app.run(host="0.0.0.0")
+if '__name__' == '__main__':
+    app.run(host="0.0.0.0")

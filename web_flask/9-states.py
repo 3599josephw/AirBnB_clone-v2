@@ -1,3 +1,4 @@
+#!/usr/bin/python3
 """Task 9 - states"""
 from flask import Flask
 from flask import render_template
@@ -21,4 +22,5 @@ def cities_list(id=None):
 def teardown():
     storage.close()
 
-app.run(host="0.0.0.0")
+if '__name__' == '__main__':
+    app.run(host="0.0.0.0")

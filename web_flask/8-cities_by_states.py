@@ -1,3 +1,4 @@
+#!/usr/bin/python3
 """Task 8 - cities_by_states"""
 from flask import Flask
 from flask import render_template
@@ -19,4 +20,5 @@ def cities_list():
 def teardown():
     storage.close()
 
-app.run(host="0.0.0.0")
+if '__name__' == '__main__':
+    app.run(host="0.0.0.0")

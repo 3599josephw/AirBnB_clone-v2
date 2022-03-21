@@ -1,3 +1,4 @@
+#!/usr/bin/python3
 """Task 2 - c_route"""
 from flask import Flask
 
@@ -19,4 +20,5 @@ def hbnb():
 def c_is_fun(text):
     return "C {}".format(text.replace("_", " "))
 
-app.run(host="0.0.0.0")
+if '__name__' == '__main__':
+    app.run(host="0.0.0.0")

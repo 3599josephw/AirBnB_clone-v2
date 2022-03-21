@@ -1,3 +1,4 @@
+#!/usr/bin/python3
 """Task 1 - hbnb route"""
 from flask import Flask
 
@@ -14,4 +15,5 @@ def hello_hbnb():
 def hbnb():
     return "HBNB"
 
-app.run(host="0.0.0.0")
+if '__name__' == '__main__':
+    app.run(host="0.0.0.0")

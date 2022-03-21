@@ -1,3 +1,4 @@
+#!/usr/bin/python3
 """Task 6 - number_odd_or_even"""
 from flask import Flask
 from flask import render_template
@@ -45,4 +46,5 @@ def even_odd(n):
         status = "is odd"
     return render_template('6-number_odd_or_even.html', n=n, status=status)
 
-app.run(host="0.0.0.0")
+if '__name__' == '__main__':
+    app.run(host="0.0.0.0")

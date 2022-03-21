@@ -16,7 +16,8 @@ states = storage.all(State)
 @app.route("/states/<id>")
 def cities_list(id=None):
     """returns html page of states or cities in a state"""
-    return render_template('8-cities_by_states.html', states=states, id=id)
+    flag = 0
+    return render_template('9-states.html', states=states, id=id, flag=flag)
 
 
 @app.teardown_appcontext

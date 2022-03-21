@@ -18,7 +18,7 @@ def states_list():
 
 
 @app.teardown_appcontext
-def teardown():
+def teardown(appcontext):
     """shuts down the database"""
     storage.close()
 

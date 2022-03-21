@@ -20,7 +20,7 @@ def cities_list(id=None):
 
 
 @app.teardown_appcontext
-def teardown():
+def teardown(appcontext):
     """shuts down database"""
     storage.close()
 

@@ -10,6 +10,7 @@
                 {% for item in states.values() | sort(attribute="name") %}
                 <li>{{ item.id }}: <B>{{ item.name }}</B></li>
                 {% endfor %}
+            </UL>
         {% else %}
 			{% for item in states.values() %}
                 {% if id == item.id %}
@@ -27,6 +28,5 @@
 				<H1>Not Found!</H1>
 			{% endif %}
         {% endif %}
-            </UL>
     </BODY>
 </HTML>

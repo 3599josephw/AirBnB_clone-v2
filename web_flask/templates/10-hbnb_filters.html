@@ -25,7 +25,7 @@
                             <li><B>{{ state.name }}</B></li>
                                 <ul>
                                 {% for city in state.cities | sort(attribute="name") %}
-                                    <li>{{ city.name }}</li>
+                                    <li>&emsp;{{ city.name }}</li>
                                 {% endfor %}
                                 </ul>
                         {% endfor %}
